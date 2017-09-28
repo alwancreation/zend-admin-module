@@ -1,0 +1,127 @@
+<div class="panel panel-default">
+        <ul class="nav nav-tabs" role="tablist">
+            <li <?php echo ($this->language=='fr')?'class="active"':'' ?>><a href="#tab1" role="tab" data-toggle="tab">French version</a></li>
+            <li <?php echo ($this->language=='en')?'class="active"':'' ?>><a href="#tab2" role="tab" data-toggle="tab">English version</a></li>
+            <li <?php echo ($this->language=='es')?'class="active"':'' ?>><a href="#tab3" role="tab" data-toggle="tab">Spanish version</a></li>
+        </ul>
+	<div class="panel-body">
+
+
+            <fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+                <!-- TAB NAVIGATION -->
+
+                <!-- TAB CONTENT -->
+                <div class="tab-content">
+                    <div class="tab-pane  <?php echo ($this->language=='fr')?'active':'' ?>" id="tab1">
+                        <form action="/administration/pages/update" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <p>
+                                        <label>Titre [FR]</label>
+                                        <input class="text-input medium-input" type="text" id="titre" name="titre" value="<?php echo $this->escape($this->article->titre); ?>" />
+                                    </p>
+                                    <p>
+                                        <label>Sous Titre [FR]</label>
+                                        <input class="text-input medium-input" type="text" id="soustitre" name="soustitre" value="<?php echo $this->escape($this->article->soustitre); ?>" />
+                                    </p>
+                                    <p>
+                                        <label>Description [FR]</label>
+                                        <textarea class="text-input textarea" id="ckeditor" name="description" cols="79" rows="15"><?php echo $this->escape($this->article->description); ?></textarea>
+                                    </p>
+                                    <p>
+                                        <input type="hidden" name="id" value="<?php echo $this->article->id; ?>">
+                                        <input type="hidden" name="language" value="fr">
+                                        <input class="button" type="submit" value="Modifier" />
+                                    </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Meta Tags</div>
+                                    	<div class="panel-body">
+                                    	    <textarea name="meta" id="" class="form-control" cols="30" rows="10" placeholder="<title>Page example ... </title>"><?php echo $this->escape($this->article->meta); ?></textarea>
+                                    	</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="tab-pane  <?php echo ($this->language=='en')?'active':'' ?>" id="tab2">
+                        <form action="/administration/pages/update" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <p>
+                                        <label>Titre [EN]</label>
+                                        <input class="text-input medium-input" type="text" id="titre" name="titre" value="<?php echo $this->escape($this->article->titre_en); ?>" />
+                                    </p>
+                                    <p>
+                                        <label>Sous Titre [EN]</label>
+                                        <input class="text-input medium-input" type="text" id="soustitre" name="soustitre" value="<?php echo $this->escape($this->article->soustitre_en); ?>" />
+                                    </p>
+                                    <p>
+                                        <label>Description[EN]</label>
+                                        <textarea class="text-input textarea ckeditor-1" id="ckeditor-1" name="description" cols="79" rows="15"><?php echo $this->escape($this->article->description_en); ?></textarea>
+                                    </p>
+                                    <p>
+                                        <input type="hidden" name="id" value="<?php echo $this->article->id; ?>">
+                                        <input type="hidden" name="language" value="en">
+                                        <input class="button" type="submit" value="Modifier" />
+                                    </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Meta Tags</div>
+                                        <div class="panel-body">
+                                            <textarea name="meta" id="" class="form-control" cols="30" rows="10" placeholder="<title>Page example ... </title>"><?php echo $this->escape($this->article->meta_en); ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="tab-pane <?php echo ($this->language=='es')?'active':'' ?>" id="tab3">
+                        <form action="/administration/pages/update" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <p>
+                                        <label>Titre [ES]</label>
+                                        <input class="text-input medium-input" type="text" id="titre_es" name="titre" value="<?php echo $this->escape($this->article->titre_es); ?>" />
+                                    </p>
+                                    <p>
+                                        <label>Sous Titre [ES]</label>
+                                        <input class="text-input medium-input" type="text" id="soustitre_es" name="soustitre" value="<?php echo $this->escape($this->article->soustitre_es); ?>" />
+                                    </p>
+                                    <p>
+                                        <label>Description[ES]</label>
+                                        <textarea class="text-input textarea ckeditor-2" id="ckeditor-2" name="description" cols="79" rows="15"><?php echo $this->escape($this->article->description_es); ?></textarea>
+                                    </p>
+                                    <p>
+                                        <input type="hidden" name="id" value="<?php echo $this->article->id; ?>">
+                                        <input type="hidden" name="language" value="es">
+                                        <input class="button" type="submit" value="Modifier" />
+                                    </p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Meta Tags</div>
+                                        <div class="panel-body">
+                                            <textarea name="meta" id="" class="form-control" cols="30" rows="10" placeholder="<title>Page example ... </title>"><?php echo $this->escape($this->article->meta_es); ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+            <div class="clear"></div><!-- End .clear -->
+
+
+	</div>
+</div>

@@ -1,0 +1,171 @@
+
+
+
+<div class="content-box"><!-- Start Content Box -->
+
+    <div class="content-box-header">
+
+        <h3>SLIDER [ Page d'accueil ]</h3>
+
+        <ul class="content-box-tabs">
+     
+            <!-- <li><a href="#tab4" <?php echo ($this->ong == 4) ? 'class="default-tab"' : '' ?>>Photos Categorie</a></li> -->
+        </ul>
+
+        <div class="clear"></div>
+    </div> <!-- End .content-box-header -->
+
+    <div class="content-box-content">
+
+
+
+        <div class="tab-content default-tab" id="tab4"> <!-- This is the target div. id must match the href of this div's tab -->
+            <form action="" method="post" enctype="multipart/form-data" class="formajout">
+
+                <fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+
+                    <p>
+                        <label>Ajouter une photo (1680px / 500px)</label>
+                        <input type="file" id="image" name="image" />
+
+                    </p>
+
+                    <p>
+                        <label>ALT [ SEO ]</label>
+                        <input type="text" class="text-input medium-input" id="img_alt" name="img_alt" />
+                        
+                    </p>
+
+                    <p>
+                        <input class="button" type="submit" name="subaddphoto" value="Ajouter" />
+                    </p>
+
+                </fieldset>
+
+                <div class="clear"></div><!-- End .clear -->
+
+            </form>
+            
+            <div class="listphoto">
+
+                <form action="" method="post">
+
+                    <?php foreach ($this->photos as $ligne) { ?>
+
+                        <div class="photoligne" style="width:250px">
+                            <img src="<?php echo $this->baseUrl() ?>/photos/home-slider/<?php echo $ligne->src ?>" style="width:100%" />
+                            <input type="text" class="text-input "  name="<?php echo $ligne->id ?>-img_alt" value="<?php echo $ligne->img_alt ; ?>" style="width:95%; margin-top: 3px;"/>
+                            <div class="clear" style="margin-bottom:5px"></div>
+                            <a href="/administration/index/supprimerslider/id/<?php echo $ligne->id ?>" style="float:left; color:red;" >supprimer</a>  <input type="text" class="text-input "  name="<?php echo $ligne->id ?>-ordre"  style="float:right; width:50px"  value="<?php echo $ligne->ordre ;?>"/>
+                            <div class="clear"></div>
+
+                        </div>
+
+                    <?php } ?>
+                    
+                    <div class="clear"></div>
+
+                    <p>
+                        <input class="button" type="submit" name="update_slides" value="Enregistrer" />
+                    </p>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div> <!-- End .content-box-content -->
+
+</div>
+
+<?php /* ?>
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>PAGE ACCUEIL</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" <?php echo (!$this->ong)?'class="default-tab"':'' ?>>Modifier</a></li> <!-- href must be unique and match the id of target div -->
+						
+                        <!-- <li><a href="#tab4" <?php echo ($this->ong=='photos')?'class="default-tab"':'' ?>>Photos</a></li> -->
+                        
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content <?php echo (!$this->ong)?'default-tab':'' ?>" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+					
+						<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								
+								<p>
+									<label>Titre</label>
+									<input class="text-input medium-input" type="text" id="titre" name="titre" value="<?php echo $this->escape($this->article->titre); ?>" />
+								</p>
+                                
+								<p>
+									<label>Footer text</label>
+									<textarea class="text-input textarea wysiwyg" id="description" name="description" cols="79" rows="15"><?php echo $this->escape($this->article->description); ?></textarea>
+								</p>
+                                
+
+								<p>
+									<input class="button" type="submit" value="Modifier" />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+						
+					</div> <!-- End #tab1 -->
+                    
+                    
+                    
+                    <div class="tab-content <?php echo ($this->ong=='photos')?'default-tab':'' ?>" id="tab4"> <!-- This is the target div. id must match the href of this div's tab -->
+						<form action="" method="post" enctype="multipart/form-data" class="formajout">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								<p>
+									<label>Ajouter une photo (656px / 286px)</label>
+									<input type="file" id="image" name="image" />
+								</p>
+								
+								<p>
+									<input class="button" type="submit" name="subaddphoto" value="Ajouter" />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						<div class="listphoto">
+                        	<?php foreach($this->photos as $ligne){ ?>
+                        	<div class="photoligne">
+                            	<img src="/photos/<?php echo $ligne->src ?>" width="300" />
+                                <a href="/administration/index/delphoto/id/<?php echo $ligne->id ?>">supprimer</a>
+                               
+                            </div>
+                            <?php } ?>
+                        </div>
+						
+					</div> <!-- End #tab1 -->
+				    
+					
+				</div> <!-- End .content-box-content -->
+				
+</div>
+
+*/ ?>

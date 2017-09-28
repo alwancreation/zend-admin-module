@@ -1,0 +1,621 @@
+<script>
+
+$(document).ready(function(){
+	$( "#prochain_depart" ).datepicker();
+});
+</script>
+
+<div class="content-box"><!-- Start Content Box -->
+		<div class="content-box-header">
+
+			<h3>Modifier</h3>
+
+			<ul class="content-box-tabs">
+				<li><a href="#tab1" <?php echo (!$this->ong)?'class="default-tab"':'' ?>>Modifier</a></li> <!-- href must be unique and match the id of target div -->
+				<li><a href="#tab4" <?php echo ($this->ong=='photos')?'class="default-tab"':'' ?>>Photos</a></li>
+
+			</ul>
+
+			<div class="clear"></div>
+
+		</div> <!-- End .content-box-header -->
+
+		<div class="content-box-content">
+
+			<div class="tab-content <?php echo (!$this->ong)?'default-tab':'' ?>" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+
+
+				<form action="" method="post" enctype="multipart/form-data">
+
+					<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+
+						<p>
+							<label>Titre</label>
+							<input class="text-input medium-input" type="text" id="titre" name="titre" value="<?php echo $this->escape($this->article->titre); ?>" />
+						</p>
+
+						<p>
+							<label>Titre [ EN ]</label>
+							<input class="text-input medium-input" type="text" id="titre_en" name="titre_en" value="<?php echo $this->escape($this->article->titre_en); ?>" />
+						</p>
+						<p>
+							<label>Code</label>
+							<input class="text-input small-input" type="text" id="code" name="code" value="<?php echo $this->escape($this->article->code); ?>" />
+						</p>
+
+
+
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">Article Prices</div>
+									<div class="panel-body">
+										<?php
+										$tarif_article=null;
+										if($this->tarif_article){
+											$tarif_article=$this->tarif_article;
+										}
+										?>
+										<table class="table table-bordered" style="width: 300px;">
+
+											<tr>
+												<td> Prix Publique </td>
+												<td><input type="text" style="width: 60px" class="text-input" name="prix_public" value="<?php echo ($tarif_article)?$tarif_article->prix_public:''; ?>"></td>
+											</tr>
+
+											<?php for($i=1;$i<=14;$i++){ ?>
+												<tr>
+													<td>Prix <?php echo $i; ?> pax(s)</td>
+													<td><input type="text" style="width: 60px" class="text-input" name="prix_<?php echo $i ?>" value="<?php echo ($tarif_article)?$tarif_article->{'prix_'.$i}:''; ?>"></td>
+												</tr>
+											<?php } ?>
+											<tr>
+												<th> + de 14 pax</th>
+												<td><input type="text" style="width: 60px" class="text-input" name="prix_14_plus" value="<?php echo ($tarif_article)?$tarif_article->prix_14_plus:'' ?>"></td>
+											</tr>
+											<tr>
+												<th>Red enf -12ans</th>
+												<td> <input type="text" style="width: 60px" class="text-input" name="reduction_enfant" value="<?php echo ($tarif_article)?$tarif_article->reduction_enfant:'' ?>"> % </td>
+											</tr>
+
+
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">Article type</div>
+									<div class="panel-body">
+										<div class="radio">
+											<label>
+												<input type="radio" name="share_option" value="0" <?php echo ($this->article->share_option==0)?'checked="checked"':''; ?>>
+												Private & public
+											</label>
+										</div>
+
+										<div class="radio">
+											<label>
+												<input type="radio" name="share_option" value="1" <?php echo ($this->article->share_option==1)?'checked="checked"':''; ?>>
+												Private
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="share_option" value="2" <?php echo ($this->article->share_option==2)?'checked="checked"':''; ?>>
+												Public
+											</label>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="panel panel-default">
+									<div class="panel-heading">Article Homepage</div>
+									<div class="panel-body">
+										<div class="radio">
+											<label>
+												<input type="radio" name="home_section" value="0" <?php echo ($this->article->home_section==0)?'checked="checked"':''; ?>>
+												None
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="home_section" value="1" <?php echo ($this->article->home_section==1)?'checked="checked"':''; ?>>
+												First selection
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="home_section" value="2" <?php echo ($this->article->home_section==2)?'checked="checked"':''; ?>>
+												Second selection
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+						 <p>
+							<label>Mini description</label>
+							<textarea class="text-input textarea ckeditor" id="minidescription" name="minidescription" cols="79" rows="5"><?php echo $this->escape($this->article->minidescription); ?></textarea>
+						</p>
+
+						<p>
+							<label>Mini description</label>
+							<textarea class="text-input textarea ckeditor" id="minidescription_en" name="minidescription_en" cols="79" rows="5"><?php echo $this->escape($this->article->minidescription_en); ?></textarea>
+						</p>
+
+
+						<p>
+							<label>Description</label>
+							<textarea class="text-input textarea ckeditor" id="description_main" name="description" cols="79" rows="15"><?php echo $this->escape($this->article->description); ?></textarea>
+						</p>
+
+						<p>
+							<label>Description</label>
+							<textarea class="text-input textarea ckeditor" id="description_main_en" name="description_en" cols="79" rows="15"><?php echo $this->escape($this->article->description_en); ?></textarea>
+						</p>
+
+
+
+
+						<p>
+							<label>Categorie</label>
+							<select name="categorie_id" class="small-input">
+								<?php
+								foreach($this->categories as $catligne){
+								?>
+								<option value="<?php echo $catligne->id; ?>" <?php echo ($this->article->categorie_id==$catligne->id)?'selected="selected"':'' ?>><?php echo $this->escape($catligne->libelle); ?></option>
+								<?php
+								}
+								?>
+							</select>
+						</p>
+
+
+
+
+
+
+
+						<?php
+						$destinations_article=array();
+						foreach($this->destinations_article as $dl){
+							$destinations_article[]=$dl->destination_id;
+						}
+						?>
+						<p>
+							<label>Destinations</label>
+							<?php foreach($this->destinations as $dstligne){ ?>
+							<span class="check_list">
+								<input type="checkbox" name="destinations[]" <?php echo (in_array($dstligne->id,$destinations_article))?'checked="checked"':'' ?> value="<?php echo $dstligne->id ?>" /> <?php echo $this->escape($dstligne->libelle); ?>
+							</span>
+							<?php } ?>
+						</p>
+
+
+
+
+						<p>
+							<?php if($this->article->image!=''){ ?>
+					  <div><img src="/photos/<?php echo $this->article->image ?>" width="233" /></div>
+							<?php } ?>
+							<label>Image (550px / 440px)</label>
+							<input type="file" id="image" name="image" />
+							<label for=""><input type="checkbox" name="recadrer" value="1"> Recadrer l'image</label>
+						</p>
+
+						<p>
+							<input class="button" type="submit" value="Modifier" />
+						</p>
+
+					</fieldset>
+
+					<div class="clear"></div><!-- End .clear -->
+
+				</form>
+
+
+			</div> <!-- End #tab1 -->
+
+			<div class="tab-content <?php echo ($this->ong=='localisation')?'default-tab':'' ?>" id="tab5">
+				<form class="form-horizontal" onSubmit="return Localiz();" method="post" action="">
+
+
+
+					<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+						<script>
+									  var map;
+
+									  function Localiz(){
+											$("#hh_map_center").val(map.getCenter());
+											$("#hh_map_zoom").val(map.getZoom());
+											return true;
+									  }
+									  var init_1=false;
+									  function initialize() {
+										  if(!init_1){
+											  init_1=true;
+										var mapOptions = {
+											<?php
+											if($this->localisation){
+											?>
+											 zoom: <?php echo $this->localisation->z ?>,
+											center: new google.maps.LatLng(<?php echo $this->localisation->h ?>,<?php echo $this->localisation->v ?>),
+											<?php } else { ?>
+										  zoom: 6,
+										  center: new google.maps.LatLng(32.369109705507874, -7.368695312500004),
+										  <?php } ?>
+										  mapTypeId: google.maps.MapTypeId.ROADMAP
+										};
+										map = new google.maps.Map(document.getElementById('google-map-v'),
+											mapOptions);
+										  }
+									  }
+									<?php if($this->ong=='localisation'){ ?>
+									$(document).ready(function(e) {
+										initialize();
+									});
+
+									<?php } ?>
+									</script>
+						  <input type="hidden" name="hh_map_center" id="hh_map_center" />
+						  <input type="hidden" name="hh_map_zoom" id="hh_map_zoom" />
+
+
+						  <div style="width:800px; position:relative;"><img src="/assets/images/monotone_location_pin_marker.png" alt="" width="28" height="28" style="position:absolute; left:386px;top:172px; z-index:1002" />
+								  <div id="google-map-v" style="width:100%; height:400px; background:#CCC"></div></div>
+
+
+<div class="control-group">
+<div class="controls" style="margin:0; padding-top:10px">
+
+  <input type="submit" class="button" name="editlocalisation" value="modifier" />
+</div>
+</div>
+</form>
+			</div>
+
+
+
+
+
+			<div class="tab-content <?php echo ($this->ong=='quand')?'default-tab':'' ?>" id="tab6">
+				<form action="" method="post" enctype="multipart/form-data">
+
+					<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+						<!-- <p>
+							<label>Quand et comment ?</label>
+							<textarea class="text-input textarea ckeditor" id="quand" name="quand" cols="79" rows="15"><?php echo $this->escape($this->article->quand); ?></textarea>
+						</p> -->
+
+						<p>
+						<label>Quand :</label>
+							<input class="text-input medium-input" type="text" id="quand_prive" name="quand_prive" value="<?php echo $this->escape($this->article->quand_prive); ?>" /></p>
+
+						<p>
+						<label>Quand  [EN]:</label>
+							<input class="text-input medium-input" type="text" id="quand_prive_en" name="quand_prive_en" value="<?php echo $this->escape($this->article->quand_prive_en); ?>" /></p>
+
+
+						<p><label>Durée :</label>
+							<input class="text-input medium-input" type="text" id="quand_dure" name="quand_dure" value="<?php echo $this->escape($this->article->quand_dure); ?>" /></p>
+
+						<p><label>Durée [EN] :</label>
+							<input class="text-input medium-input" type="text" id="quand_dure_en" name="quand_dure_en" value="<?php echo $this->escape($this->article->quand_dure_en); ?>" /></p>
+
+						<p><label>Langues  :</label>
+							<input class="text-input medium-input" type="text" id="langues" name="langues" value="<?php echo $this->escape($this->article->langues); ?>" /></p>
+
+
+						<p><label>Langues [EN]  :</label>
+							<input class="text-input medium-input" type="text" id="langues_en" name="langues_en" value="<?php echo $this->escape($this->article->langues_en); ?>" /></p>
+
+
+						<p><label>Prise en charge :</label>
+							<input class="text-input medium-input" type="text" id="quand_lieu" name="quand_lieu" value="<?php echo $this->escape($this->article->quand_lieu); ?>" /></p>
+
+
+						<p><label>Prise en charge [EN]:</label>
+							<input class="text-input medium-input" type="text" id="quand_lieu" name="quand_lieu_en" value="<?php echo $this->escape($this->article->quand_lieu_en); ?>" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+						<p>
+							<input class="button" type="submit" name="subedit_quand" value="Valider" />
+						</p>
+
+
+
+					</fieldset>
+
+					<div class="clear"></div><!-- End .clear -->
+
+				</form>
+			</div>
+
+			<div class="tab-content <?php echo ($this->ong=='conditions')?'default-tab':'' ?>" id="tab7">
+				<form action="" method="post" enctype="multipart/form-data">
+
+					<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+						<p>
+							<label>Informations </label>
+							<textarea class="text-input textarea ckeditor" id="conditions" name="conditions" cols="79" rows="15"><?php echo $this->escape($this->article->conditions); ?></textarea>
+						</p>
+
+
+						<p>
+							<label>Informations [EN] </label>
+							<textarea class="text-input textarea ckeditor" id="conditions_en" name="conditions_en" cols="79" rows="15"><?php echo $this->escape($this->article->conditions_en); ?></textarea>
+						</p>
+<!-- 							<p>
+							<label>Conditions  (Anglais)</label>
+							<textarea class="text-input textarea ckeditor" id="conditions_en" name="conditions_en" cols="79" rows="15"><?php echo $this->escape($this->article->conditions_en); ?></textarea>
+						</p> -->
+
+<!-- 								<p>
+							<label>En groupe </label>
+							<textarea class="text-input textarea"  name="desc_group" cols="79" rows="4"><?php echo $this->escape($this->article->desc_group); ?></textarea>
+						</p>
+
+						<p>
+							<label>En groupe (Anglais)</label>
+							<textarea class="text-input textarea"  name="desc_group_en" cols="79" rows="4"><?php echo $this->escape($this->article->desc_group); ?></textarea>
+						</p>
+
+
+
+						<p>
+							<label>En privé </label>
+							<textarea class="text-input textarea"  name="desc_prive" cols="79" rows="4"><?php echo $this->escape($this->article->desc_prive_en); ?></textarea>
+						</p>
+
+						<p>
+							<label>En privé (Anglais) </label>
+							<textarea class="text-input textarea"  name="desc_prive_en" cols="79" rows="4"><?php echo $this->escape($this->article->desc_prive_en); ?></textarea>
+						</p> -->
+
+
+
+
+
+
+						<p>
+							<input class="button" type="submit" name="subedit_conditions" value="Valider" />
+						</p>
+
+
+
+					</fieldset>
+
+					<div class="clear"></div><!-- End .clear -->
+
+				</form>
+			</div>
+
+
+
+			<div class="tab-content <?php echo ($this->ong=='jours')?'default-tab':'' ?>" id="tab3" style="height:auto; overflow:hidden;">
+				<div class="content-box column-left">
+					<div class="content-box-header">
+						<h3>Jours</h3>
+					</div>
+					<div class="tab-content default-tab">
+
+					<div style="padding:15px">
+					<?php
+					if($this->jour){
+						?>
+						<form action="" method="post" enctype="multipart/form-data">
+
+					<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+
+						<p>
+							<label>Titre</label>
+							<input class="text-input medium-input" type="text" id="libelle" name="libelle" value="<?php echo $this->escape($this->jour->libelle); ?>" />
+						</p>
+						<p>
+							<label>Description</label>
+							<textarea class="text-input textarea ckeditor" id="description" name="description" cols="79" rows="15"><?php echo $this->escape($this->jour->description); ?></textarea>
+						</p>
+
+
+
+
+						<p>
+							<?php if($this->jour->image!=''){
+								?>
+								<div>
+									<img src="/photos/<?php echo $this->jour->image ?>" width="200" />
+								</div>
+								<?php
+							}?>
+							<label>Image</label>
+							<input type="file" id="image" name="image" />
+						</p>
+
+
+						<div class="content-box">
+							<div class="content-box-header">
+								<h3>Traduction anglais</h3>
+								<div class="clear"></div>
+							</div>
+							<div class="content-box-content" style="display: none;">
+								<div class="tab-content default-tab">
+									<p>
+										<label>Titre</label>
+										<input class="text-input medium-input" type="text" id="libelle_en" name="libelle_en" value="<?php echo $this->escape($this->jour->libelle_en); ?>" />
+									</p>
+									<p>
+										<label>Description</label>
+										<textarea class="text-input textarea ckeditor" id="description_en" name="description_en" cols="79" rows="15"><?php echo $this->escape($this->jour->description_en); ?></textarea>
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+						<p>
+							<input class="button" type="submit" name="subeditjour" value="Modifier" />
+						</p>
+
+					</fieldset>
+
+					<div class="clear"></div><!-- End .clear -->
+
+				</form>
+						<?php
+					}else{
+					?>
+					<table>
+
+					<thead>
+						<tr>
+						   <th>Titre</th>
+						   <th></th>
+						   <th></th>
+						   <th></th>
+						   <th>Actions</th>
+						</tr>
+
+					</thead>
+
+					<tfoot>
+						<tr>
+							<td colspan="5">
+
+							</td>
+						</tr>
+					</tfoot>
+
+					<tbody>
+
+						<?php
+						foreach($this->jours as $ligne){
+
+
+						?>
+						<tr>
+							<td><?php echo $this->escape($ligne->libelle); ?></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<!-- Icons -->
+								 <a href="/administration/produits/modifier/id/<?php echo $this->article->id ?>/ong/jours/modifierjour/<?php echo $ligne->id ?>" title="Edit"><img src="<?php echo $this->baseUrl(); ?>/adminres/images/icons/pencil.png" alt="Edit" /></a>
+								 <a href="/administration/produits/supprimerjour/id/<?php echo $ligne->id ?>" title="Delete"><img src="<?php echo $this->baseUrl(); ?>/adminres/images/icons/cross.png" alt="Delete" /></a>
+							</td>
+						</tr>
+						<?php } ?>
+
+					</tbody>
+
+				</table>
+				<?php
+				}
+				?>
+				</div>
+					</div>
+				</div>
+
+				<div class="content-box column-right">
+					<div class="content-box-header">
+						<h3>Ajouter Jour</h3>
+					</div>
+					<div class="tab-content  default-tab">
+					<form action="" method="post" enctype="multipart/form-data" style="padding:20px">
+
+					<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+
+						<p>
+							<label>Titre</label>
+							<input class="text-input medium-input" type="text" id="libelle" name="libelle" />
+						</p>
+
+						<?php /* <p>
+							<label>Titre  </label>
+							<input class="text-input medium-input" type="text" id="titre" name="titre" />
+						</p> */?>
+
+						<p>
+							<label>Description</label>
+							<textarea class="text-input textarea ckeditor" id="description" name="description" cols="79" rows="15"></textarea>
+						</p>
+
+
+						<p>
+							<label>Image</label>
+							<input type="file" id="image" name="image" />
+						</p>
+
+						<p>
+							<input class="button" type="submit" name="subaddjour" value="Ajouter" />
+						</p>
+
+					</fieldset>
+
+					<div class="clear"></div><!-- End .clear -->
+
+				</form>
+					</div>
+				</div>
+
+
+
+			</div>
+			<div class="tab-content <?php echo ($this->ong=='photos')?'default-tab':'' ?>" id="tab4"> <!-- This is the target div. id must match the href of this div's tab -->
+
+
+				<form action="" method="post" enctype="multipart/form-data" class="formajout">
+
+					<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+						<p>
+							<label>Ajouter une photo (1000px / 430px)</label>
+							<input type="file" id="image" name="image" />
+							<label for="recarder"><input type="checkbox" name="recadrer" value="1"> Recadrer Image </label>
+						</p>
+
+						<p>
+							<input class="button" type="submit" name="subaddphoto" value="Ajouter" />
+						</p>
+
+					</fieldset>
+
+					<div class="clear"></div><!-- End .clear -->
+
+				</form>
+				<div class="listphoto">
+					<?php foreach($this->photos as $ligne){ ?>
+					<div class="photoligne">
+						<img src="/photos/<?php echo $ligne->src ?>" width="200" />
+						<a href="/administration/produits/modifier/id/<?php echo $this->article->id ?>/delphoto/<?php echo $ligne->id ?>">supprimer</a>
+
+					</div>
+					<?php } ?>
+				</div>
+
+			</div> <!-- End #tab1 -->
+
+
+		</div> <!-- End .content-box-content -->
+
+	</div>

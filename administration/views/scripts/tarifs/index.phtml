@@ -1,0 +1,167 @@
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Plans Tarifs Excursion</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">Liste</a></li> 
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+						<table>
+							
+							<thead>
+								<tr>
+								   <th>Titre</th>
+								   <th>Prix en public</th>
+								   <th>Prix 1 p</th>
+								   <th>Prix 2 p</th>
+								   <th>Prix 3 p</th>
+								   <th>Prix 4 p</th>
+								   <th>Prix 5 p</th>
+								   <th>Prix 6 p</th>
+								   <th>Actions</th>
+								</tr>
+								
+							</thead>
+						 
+							
+						 
+							<tbody>
+								
+								<?php 
+								foreach($this->tarifs as $ligne){
+									
+									
+								?>
+								
+								<tr>
+									<td><?php echo $this->escape($ligne->libelle); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_public); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_1); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_2); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_3); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_4); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_5); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_6); ?></td>
+									<td>
+										<!-- Icons -->
+										 <a href="/administration/tarifs/modifier/id/<?php echo $ligne->id ?>" title="Edit">Modifier</a>
+										  
+									</td>
+								</tr>
+								<?php } ?>
+								
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+					
+					 <!-- End #tab2 -->        
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Plans Tarifs Transferts</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab11" class="default-tab">Liste</a></li>
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content default-tab" id="tab11"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+						<table>
+							
+							<thead>
+								<tr>
+								   <th>Titre</th>
+								   <th>Prix 1 p</th>
+								   <th>Prix 2 p</th>
+								   <th>Prix 3 p</th>
+								   <th>Prix 4 p</th>
+								   <th>Prix 5 p</th>
+								   <th>Prix 6 p</th>
+								   <th>Prix 7 p</th>
+								   <th>Prix 8 p</th>
+								   <th>Prix 9 p</th>
+								   <th>Prix 10 p</th>
+								   <th>Actions</th>
+								</tr>
+								
+							</thead>
+						 
+							
+						 
+							<tbody>
+								
+								<?php 
+								foreach($this->tt_tarifs as $ligne){
+									
+									
+								?>
+								
+								<tr>
+									<td><?php echo $this->escape($ligne->libelle); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_1); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_2); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_3); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_4); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_5); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_6); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_7); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_8); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_9); ?></td>
+									<td><?php echo FNC::MoneyF($ligne->prix_10); ?></td>
+									<td>
+										<!-- Icons -->
+										 <a href="/administration/tarifs/ttmodifier/id/<?php echo $ligne->id ?>" title="Edit">Modifier</a>
+										 
+									</td>
+								</tr>
+								<?php } ?>
+								
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+					
+					 <!-- End #tab2 -->        
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>

@@ -1,0 +1,272 @@
+<script>
+
+$(document).ready(function(){
+	$( "#prochain_depart" ).datepicker();
+});
+</script>
+
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Modifier</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" <?php echo (!$this->ong)?'class="default-tab"':'' ?>>Modifier</a></li>
+						<!-- <li><a href="#tab7" <?php echo ($this->ong=='conditions')?'class="default-tab"':'' ?>>Conditions </a></li> -->
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content <?php echo (!$this->ong)?'default-tab':'' ?>" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+					
+						<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+
+							<p>
+									<label>Titre</label>
+									<input class="text-input medium-input" type="text" id="titre" name="titre" value="<?php echo $this->escape($this->transfert->titre) ?>" />
+								</p>
+
+
+								<p>
+									<label>Titre [EN ]</label>
+									<input class="text-input medium-input" type="text" id="titre" name="titre_en" value="<?php echo $this->escape($this->transfert->titre_en) ?>" />
+								</p>
+								
+
+							<div>
+
+								<p style="display:inline-block; margin-right:15px">
+									<label>Destination Depart </label>
+									<select name="destination_depart_id" id="destination_depart_id" required="required">
+										<?php foreach ($this->destinations as $key => $ligne): ?>
+										<option value="<?php echo $this->escape($ligne->id) ?>" <?php echo ($this->transfert->destination_depart_id==$ligne->id)?'selected="selected"':'' ?>><?php echo $this->escape($ligne->libelle) ?></option>
+										<?php endforeach ?>
+									</select>
+								</p>
+
+								<p style="display:inline-block;">
+										<label>Lieu Depart </label>
+
+										<select name="lieu_depart_id" id="lieu_depart_id" class="lieu-select" required="required">
+										<option value=""></option>
+
+											<?php foreach ($this->lieux as $key => $ligne): ?>
+											<option value="<?php echo $this->escape($ligne->id) ?>" <?php if($this->transfert->lieu_depart_id==$ligne->id) echo 'selected'; ?>><?php echo $this->escape($ligne->libelle) ?></option>
+											<?php endforeach ?>
+										</select>
+									</p>
+								</div>
+
+								<div>
+
+
+
+								<p style="display:inline-block; margin-right:15px">
+									<label>Destination Arrivée </label>
+									<select name="destination_arrivee_id" id="destination_arrivee_id" required="required">
+										<?php foreach ($this->destinations as $key => $ligne): ?>
+										<option value="<?php echo $this->escape($ligne->id) ?>" <?php echo ($this->transfert->destination_arrivee_id==$ligne->id)?'selected="selected"':'' ?>><?php echo $this->escape($ligne->libelle) ?></option>
+										<?php endforeach ?>
+									</select>
+								</p>
+
+
+								<p style="display:inline-block;">
+									<label>Lieu Arrivée </label>
+									<select name="lieu_arrivee_id" id="lieuarrt_id" class="lieu-select" required="required">
+										<option value=""></option>
+
+										<?php foreach ($this->lieux as $key => $ligne): ?>
+										<option value="<?php echo $this->escape($ligne->id) ?>" <?php if($this->transfert->lieu_arrivee_id==$ligne->id) echo 'selected'; ?>><?php echo $this->escape($ligne->libelle) ?></option>
+										<?php endforeach ?>
+									</select>
+								</p>
+
+								</div>
+
+
+                                
+
+								<p>
+									<label>Durée estimé</label>
+									<input class="text-input medium-small" type="text" id="duree" name="duree" value="<?php echo $this->escape($this->transfert->duree) ?>" required="required" />
+								</p>
+
+								<p style="display:inline-block; margin-right:15px">
+									<label>Vehicule </label>
+									<select name="vehicule" id="vehicule" required="required">
+										<option value=""></option>
+										<?php foreach ($this->vehicule as $key => $ligne): ?>
+										<option value="<?php echo $this->escape($ligne->id) ?>" <?php if($this->transfert->vehicule_id==$ligne->id) echo 'selected'; ?> ><?php echo $this->escape($ligne->titre) ?></option>
+										<?php endforeach ?>
+									</select>
+								</p>
+
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="panel panel-default">
+											<div class="panel-heading">Article Prices</div>
+											<div class="panel-body">
+												<?php
+												$tarif_article=null;
+												if($this->tarif_article){
+													$tarif_article=$this->tarif_article;
+												}
+												?>
+												<table class="table table-bordered" style="width: 300px;">
+
+													<tr>
+														<td> Prix Publique </td>
+														<td><input type="text" style="width: 60px" class="text-input" name="prix_public" value="<?php echo ($tarif_article)?$tarif_article->prix_public:''; ?>"></td>
+													</tr>
+
+													<?php for($i=1;$i<=14;$i++){ ?>
+														<tr>
+															<td>Prix <?php echo $i; ?> pax(s)</td>
+															<td><input type="text" style="width: 60px" class="text-input" name="prix_<?php echo $i ?>" value="<?php echo ($tarif_article)?$tarif_article->{'prix_'.$i}:''; ?>"></td>
+														</tr>
+													<?php } ?>
+													<tr>
+														<th> + de 14 pax</th>
+														<td><input type="text" style="width: 60px" class="text-input" name="prix_14_plus" value="<?php echo ($tarif_article)?$tarif_article->prix_14_plus:'' ?>"></td>
+													</tr>
+													<tr>
+														<th>Red enf -12ans</th>
+														<td> <input type="text" style="width: 60px" class="text-input" name="reduction_enfant" value="<?php echo $this->transfert->reduction_enfant; ?>"> % </td>
+													</tr>
+
+
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="panel panel-default">
+											<div class="panel-heading">Article type</div>
+											<div class="panel-body">
+												<div class="radio">
+													<label>
+														<input type="radio" name="share_option" value="0" <?php echo ($this->transfert->share_option==0)?'checked="checked"':''; ?>>
+														Private & public
+													</label>
+												</div>
+
+												<div class="radio">
+													<label>
+														<input type="radio" name="share_option" value="1" <?php echo ($this->transfert->share_option==1)?'checked="checked"':''; ?>>
+														Private
+													</label>
+												</div>
+												<div class="radio">
+													<label>
+														<input type="radio" name="share_option" value="2" <?php echo ($this->transfert->share_option==2)?'checked="checked"':''; ?>>
+														Public
+													</label>
+												</div>
+
+											</div>
+										</div>
+									</div>
+                                </div>
+                                
+                               
+								<!-- <p>
+									<label>Description</label>
+									<textarea class="text-input textarea ckeditor" id="description" name="description" cols="79" rows="15"><?php echo ($this->transfert->description) ?></textarea>
+								</p> -->
+
+								 <p>
+									<?php if($this->transfert->image!=''){ ?>
+                           	  		<div><img src="/photos/<?php echo $this->transfert->image ?>" width="233" /></div>
+                                    <?php } ?>
+									<label>Image (250px / 200px)</label>
+									<input type="file" id="image" name="image" />
+									<label for=""><input type="checkbox" name="recadrer" value="1"> Recadrer photo</label>
+								</p> 
+
+
+
+
+								
+								
+
+								
+
+								<p>
+									<input class="button" name="subedit_main" type="submit" value="Modifier" />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+						
+					</div> <!-- End #tab1 -->
+                    
+                    
+
+
+
+
+                    <?php /* ?>
+					
+                    
+					<div class="tab-content <?php echo ($this->ong=='conditions')?'default-tab':'' ?>" id="tab7">
+                    	<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								<p>
+									<label>Conditions </label>
+									<textarea class="text-input textarea ckeditor" id="conditions" name="conditions" cols="79" rows="15"><?php echo $this->escape($this->transfert->conditions); ?></textarea>
+								</p>
+
+								<p>
+									<label>En groupe </label>
+									<textarea class="text-input textarea"  name="desc_group" cols="79" rows="4"><?php echo $this->escape($this->transfert->desc_group); ?></textarea>
+								</p>
+
+								<p>
+									<label>En privé </label>
+									<textarea class="text-input textarea"  name="desc_prive" cols="79" rows="4"><?php echo $this->escape($this->transfert->desc_prive); ?></textarea>
+								</p>
+
+								
+
+
+                                
+                                
+                                
+								<p>
+									<input class="button" type="submit" name="subedit_conditions" value="Valider" />
+								</p>
+								
+                                
+                                
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+                    </div>
+
+                    <?php */ ?>
+
+
+
+                    
+                     <!-- End #tab1 -->
+				    
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>

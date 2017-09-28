@@ -1,0 +1,94 @@
+<?php
+
+class Administration_CategorieController extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+    	$admin_user = new Zend_Session_Namespace('admin_user');
+        if(!Zend_Auth::getInstance()->hasIdentity() or !isset($admin_user->user))
+        {
+            $this->_redirect('administration/login');
+        }
+        
+        /* Initialize action controller here */
+        
+        $layout = Zend_Layout::getMvcInstance();
+        $layout->setLayoutPath(APPLICATION_PATH."/layouts/scripts/admin/");
+        
+        $this->view->page_select="categorie";
+    }
+	
+    public function indexAction()
+    {
+    	$tbl_categorie=new Application_Model_DbTable_Categorie();
+    	$categories=$tbl_categorie->fetchAll();
+    	$request=$this->getRequest();
+    	if ($request->isPost()) {
+    		 
+    		$data = array(
+    				"libelle"=>$this->getParam("libelle",''),
+    				"description"=>$this->getParam("description",''),
+                    "libelle_en"=>$this->getParam("libelle_en",''),
+                    "description_en"=>$this->getParam("description_en",''),
+    		);
+    		 
+    		$tbl_categorie->insert($data);
+    		$this->_redirect('administration/categorie');
+    	}
+    	
+    	$this->view->categories=$categories;
+    }
+    
+    	
+    	
+    public function supprimerAction()
+    {
+        
+        $this->_redirect('administration/categorie');
+    	exit();
+
+    }
+
+    public function modifierAction()
+    {
+
+    	$tbl_categorie=new Application_Model_DbTable_Categorie();
+    	$id=$this->getParam("id");
+    	
+    	$categorie=$tbl_categorie->find($id)->current();
+
+    	if($categorie){
+
+    		$request=$this->getRequest();
+    	
+    		if ($request->isPost()) {
+    			
+    				$data = array(
+                        
+    						"libelle"=>$this->getParam("libelle",''),
+    						"description"=>$this->getParam("description",''),
+                            "libelle_en"=>$this->getParam("libelle_en",''),
+                            "description_en"=>$this->getParam("description_en",''),
+    				);
+    	
+    				$tbl_categorie->update($data,array("id=?"=>$id));
+    				$this->_redirect('administration/categorie/modifier/id/'.$id);
+    		}
+    	
+    		$this->view->categorie=$categorie;
+    	
+    	}else{
+
+    		$this->redirect('/administration/categorie');
+
+    	}
+    	
+    	
+    }
+    
+    
+}
+
+
+

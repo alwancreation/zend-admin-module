@@ -1,0 +1,87 @@
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Modifier</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">Modifier</a></li> <!-- href must be unique and match the id of target div -->
+                        
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+					
+						<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								
+								<p>
+									<label>Titre</label>
+									<input class="text-input medium-input" type="text" id="libelle" name="libelle" value="<?php echo $this->escape($this->tarif->libelle); ?>" />
+								</p>
+                               
+                              	 <p>
+									<label>Prix Public</label>
+									<input class="text-input small-input" type="text" id="prix_public" name="prix_public" value="<?php echo $this->escape($this->tarif->prix_public); ?>" />
+								</p>
+								
+								<p>
+									<label>Prix privé 1 personne </label>
+									<input class="text-input small-input" type="text" id="prix_1" name="prix_1" value="<?php echo $this->escape($this->tarif->prix_1); ?>" />
+								</p>
+								
+								<p>
+									<label>Prix privé 2 personnes </label>
+									<input class="text-input small-input" type="text" id="prix_2" name="prix_2" value="<?php echo $this->escape($this->tarif->prix_2); ?>" />
+								</p>
+								
+								<p>
+									<label>Prix privé 3 personnes </label>
+									<input class="text-input small-input" type="text" id="prix_3" name="prix_3" value="<?php echo $this->escape($this->tarif->prix_3); ?>" />
+								</p>
+								
+								<p>
+									<label>Prix privé 4 personnes </label>
+									<input class="text-input small-input" type="text" id="prix_4" name="prix_4" value="<?php echo $this->escape($this->tarif->prix_4); ?>" />
+								</p>
+								
+								<p>
+									<label>Prix privé 5 personnes </label>
+									<input class="text-input small-input" type="text" id="prix_5" name="prix_5" value="<?php echo $this->escape($this->tarif->prix_5); ?>" />
+								</p>
+								
+								<p>
+									<label>Prix privé 6 personnes </label>
+									<input class="text-input small-input" type="text" id="prix_6" name="prix_6" value="<?php echo $this->escape($this->tarif->prix_6); ?>" />
+								</p>
+								
+								
+								
+								
+								
+							
+								<p>
+									<input class="button" type="submit" value="  Modifier  " />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+						
+					</div> <!-- End #tab1 -->
+                    
+                    
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>

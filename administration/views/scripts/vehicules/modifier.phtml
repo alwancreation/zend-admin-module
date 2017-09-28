@@ -1,0 +1,72 @@
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Modifier</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">Modifier</a></li> <!-- href must be unique and match the id of target div -->
+                        
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+					
+						<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								
+								<p>
+									<label>Titre</label>
+									<input class="text-input medium-input" type="text" id="libelle" name="libelle" value="<?php echo $this->escape($this->vehicule->titre); ?>" />
+								</p>
+
+								<p>
+									<label>Titre [EN ]</label>
+									<input class="text-input medium-input" type="text" id="libelle_en" name="libelle_en" value="<?php echo $this->escape($this->vehicule->titre_en); ?>" />
+								</p>
+
+
+								<p>
+									
+
+									<label>Image (120px / 80px)</label>
+									<input type="file" id="image" name="image" />
+									<label for=""><input type="checkbox" name="recadrer" value="1"> Recadrer photo</label>
+
+									<br>
+
+									<?php if($this->vehicule->img!=''){ ?>
+                           	  		<div><img src="/photos/vehicules/<?php echo $this->vehicule->img ; ?>" width="120" /></div>
+                                    <?php } ?>
+								</p>
+                              
+								
+								
+								
+						
+								
+								<p>
+									<input class="button" type="submit" value="Modifier" />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+						
+					</div> <!-- End #tab1 -->
+                    
+                    
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>

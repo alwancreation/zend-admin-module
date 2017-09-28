@@ -1,0 +1,166 @@
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Produits</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" <?php echo ($this->ong==0)?'class="default-tab"':'' ?>>Liste</a></li> <!-- href must be unique and match the id of target div -->
+						<li><a href="#tab2" <?php echo ($this->ong==1)?'class="default-tab"':'' ?>>Ajouter</a></li>
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content <?php echo ($this->ong==0)?'default-tab':'' ?>" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+						<table>
+							
+							<thead>
+								<tr>
+								   <th>Titre</th>
+								   <th>Categorie</th>
+								   <th>Position Accueil</th>
+								   <th></th>
+								   <th>Actions</th>
+								</tr>
+								
+							</thead>
+						 
+
+						 
+							<tbody>
+								
+								<?php 
+								foreach($this->articles as $ligne){
+									$categorie=FNC::getObjetById($this->categories,$ligne->categorie_id);
+									
+								?>
+								
+								<tr>
+									<td><?php echo $this->escape($ligne->titre); ?></td>
+									<td><?php echo ($categorie)?$categorie->libelle:'------' ?></td>
+									<td><b><?php echo ($ligne->home_section)?$ligne->home_section:''; ?></b></td>
+									<td></td>
+									<td>
+										<!-- Icons -->
+										 <a href="/administration/produits/modifier/id/<?php echo $ligne->id ?>" title="Edit">Modifier</a>
+										 <a href="/administration/produits/supprimer/id/<?php echo $ligne->id ?>" title="Delete">Supprimer</a>
+									</td>
+								</tr>
+								<?php } ?>
+								
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+					
+					<div class="tab-content <?php echo ($this->ong==1)?'default-tab':'' ?>" id="tab2">
+					
+						<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								
+								<p>
+									<label>Titre</label>
+									<input class="text-input medium-input" type="text" id="titre" name="titre" />
+								</p>
+
+								<p>
+									<label>Titre [ EN ] </label>
+									<input class="text-input medium-input" type="text" id="titre_en" name="titre_en" />
+								</p>
+                                
+                                <p>
+									<label>Tarifs</label>
+									
+									
+									<table class="table table-bordered" style="width: 300px;">
+
+
+									<tr>
+										<td> Prix Publique </td>
+										<td><input type="text" style="width: 60px" class="text-input" name="prix_public" value=""></td>
+									</tr>
+
+										<?php for($i=1;$i<=14;$i++){ ?>
+											<tr>
+											<td>Prix <?php echo $i; ?> pax(s)</td>
+											<td><input type="text" style="width: 60px" class="text-input" name="prix_<?php echo $i ?>" value=""></td>
+											</tr>
+										<?php } ?>
+									<tr>
+									<th> + de 14 pax</th>
+									<td><input type="text" style="width: 60px" class="text-input" name="prix_14_plus" value=""></td>
+									</tr>
+									<tr>
+									<th>Red enf -12ans</th>
+									<td> <input type="text" style="width: 60px" class="text-input" name="reduction_enfant" value=""> % </td>
+									</tr>
+
+
+									</table>
+
+
+								</p>
+                                
+                                
+                                
+                                 <p>
+									<label>Mini description</label>
+									<textarea class="text-input textarea ckeditor" id="minidescription" name="minidescription" cols="79" rows="5"></textarea>
+								</p>
+
+								<p>
+									<label>Mini description [ EN ]</label>
+									<textarea class="text-input textarea ckeditor" id="minidescription_en" name="minidescription_en" cols="79" rows="5"></textarea>
+								</p>
+
+								<p>
+									<label>Description</label>
+									<textarea class="text-input textarea ckeditor" id="description" name="description" cols="79" rows="15"></textarea>
+								</p>
+
+								<p>
+									<label>Description [ EN ]</label>
+									<textarea class="text-input textarea ckeditor" id="description_en" name="description_en" cols="79" rows="15"></textarea>
+								</p>
+								
+								
+								
+								
+								<p>
+									<label>Categorie</label>              
+									<select name="categorie_id" class="small-input">
+                                        <?php 
+										foreach($this->categories as $catligne){
+										?>
+										<option value="<?php echo $catligne->id; ?>"><?php echo $this->escape($catligne->libelle); ?></option>
+                                        <?php 
+										}
+										?>
+									</select> 
+								</p>
+								<p>
+									<label>Image (550px / 440px)</label>
+									<input type="file" id="image" name="image" />
+									<label for=""><input type="checkbox" name="recadrer" value="1"> Recadrer l'image</label>
+								</p>
+								
+								<p>
+									<input class="button" type="submit" value="Ajouter" />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+					</div> <!-- End #tab2 -->        
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>

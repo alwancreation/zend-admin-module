@@ -1,0 +1,352 @@
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Commandes</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1">Liste</a></li> <!-- href must be unique and match the id of target div -->
+						<li><a href="#tab2" class="default-tab">Details</a></li> <!-- href must be unique and match the id of target div -->
+						
+					</ul>
+					<div class="clear"></div>
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content " id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+
+
+					
+						<table style="font-size:12px">
+							
+							<thead>
+								<tr>
+                                   <th>Ref</th>
+								   <th>Client</th>
+								   <th>Email</th>
+								   <th>Date</th>
+								   <th></th>
+								   <th>Prix payé</th>
+                                   <th>Etat commande</th>
+								   <th>Actions</th>
+								</tr>
+								
+							</thead>
+							
+							<tbody>
+								
+								<?php 
+
+
+								foreach($this->commandes as $ligne){
+									$client=$this->clients[$ligne->client_id];
+									$date=new DateTime($ligne->date);
+									$date_arrivee=new DateTime($ligne->date_arrivee);
+
+									
+								?>
+								
+								<tr>
+                                	<td>
+                                    <?php echo $this->escape($ligne->id); ?>
+                                    
+                                    </td>
+									<td><?php echo $this->escape($client->sexe.' '.$client->nom.' '.$client->prenom); ?></td>
+									<td><?php echo $this->escape($client->email); ?></td>
+
+									<td><?php echo $date->format('d/m/Y H:i'); ?></td>
+									<td></td>
+
+									<td><?php echo $this->escape($ligne->prix_total); ?> dhs</td>
+                                    <td><b style="color:#6C0">payé</b></td>
+									<td>
+										<a href="/administration/commandes/details/id/<?php echo $ligne->id ?>" rel="modal">Afficher détails</a>
+										
+									</td>
+									
+								</tr>
+								<tr>
+									
+								</tr>
+								<?php } ?>
+								
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="tab-content default-tab" id="tab2"> <!-- This is the target div. id must match the href of this div's tab -->
+
+						<h2>Details commande : </h2>
+						<?php 
+
+						$date_commande=new DateTime($this->my_commade->date);
+
+						 ?>
+						<table style="font-size:12px">
+							<tbody>
+
+								<tr>
+                                	<td width="200">Date de la commande : <b><?php echo $date_commande->format("d/m/Y") ?></b></td>
+								</tr>
+
+								<tr>
+                                	<td>Client : <b><?php echo $this->escape($this->commande_client->sexe.' '.$this->commande_client->nom.' '.$this->commande_client->prenom); ?></b></td>
+								</tr>
+
+								<tr>
+                                	<td>Total payé : <b><?php echo FNC::MoneyF($this->my_commade->prix_total); ?></b></td>
+								</tr>
+
+								<tr>
+                                	<td>Nombre de produits : <b><?php echo count($this->articles)+count($this->transferts); ?></b></td>
+								</tr>
+								<tr>
+									<td>Type excursion : <b><?php echo ($this->my_commade->share_option==1)?'private':'shared' ; ?></b></td>
+								</tr>
+								<tr>
+									<td>Hotel / adresse : <b><?php echo $this->my_commade->client_place;?></b></td>
+								</tr>
+
+
+								
+							</tbody>
+							
+						</table>
+<br><br>
+						<h2>Lignes de commande : </h2>
+						<br>
+
+						<!-- <h3>Excursions</h3>
+						<table style="font-size:12px">
+							<tbody>
+
+								<tr>
+                                	<th>Nom produit</th>
+                                	<th>Nombre de personnes</th>
+                                	<th>Date départ</th>
+                                	<th>Prix / Personne</th>
+                                	<th>Prix</th>
+								</tr>
+								<?php 
+								$prix_total=0;
+								foreach ($this->articles as $key => $article){ 
+									$article_url=$article->url;
+		                      
+
+			                      	$prix=$article->prix;
+
+			                      	$date_debut=new DateTime($article->date_debut);
+
+
+								?>
+									<tr>
+	                                	<td><?php echo $article->titre ?></td>
+	                                	<td><?php echo $article->nombre_adultes ?></td>
+	                                	<td><?php echo $date_debut->format("d/m/Y") ?></td>
+	                                	<td><?php echo FNC::MoneyF($prix/$article->nombre_adultes); ?></td>
+	                                	<td><?php echo FNC::MoneyF($prix); ?></td>
+									</tr>
+
+								<?php } ?>
+
+
+
+								
+							</tbody>
+							
+						</table>
+
+						<br>
+						<br> -->
+
+						<!-- <h3>Transferts</h3> -->
+
+						<!-- Excursions -->
+
+						<?php if (count($this->articles)>0) : ?>
+
+								<h6>Excursions :</h6>
+								
+					   
+						<table style="font-size:12px">
+							<tbody>
+
+								<tr style="border-bottom: 1px solid;">
+                                	<th>Nom produit</th>
+                                	<th>Nombre d'adultes</th>
+                                	<th>Nombre d'enfants</th>
+                                	<th>Date départ</th>
+                                	<th>Prix / Adulte</th>
+                                	<th>Prix / Enfant</th>
+                                	<th>Prix Total </th>
+								</tr>
+								
+
+								
+								<?php 
+								$prix_total=0;
+								foreach ($this->articles as $key => $article){ 
+									$article_url=$article->url;
+		                      
+
+			                      	$prix=$article->prix;
+
+			                      	$date_debut=new DateTime($article->date_debut);
+
+
+								?>
+									<tr>
+										
+	                                	<td><?php echo $article->titre ?></td>
+	                                	<td><?php echo $article->nombre_adultes ?></td>
+	                                	<td><?php echo $article->nombre_enfants ?></td>
+	                                	<td><?php echo $date_debut->format("d/m/Y") ?></td>
+	                                	<td><?php echo FNC::MoneyF($article->prix_adulte); ?></td>
+										<td><?php echo FNC::MoneyF($article->prix_enfant); ?></td>
+	                                	<td><?php echo FNC::MoneyF($prix); ?></td>
+									</tr>
+								</tbody>
+							</table>
+							<br>
+							<br>
+							<?php } ?>
+							<?php endif ; ?>
+
+
+						<!-- Transferts -->
+							
+
+						<?php if (count($this->transferts)>0) : ?>
+								<h6>Transfers :</h6>
+							
+
+							<table style="font-size:12px">
+							<tbody>
+
+								<tr style="border-bottom: 1px solid;">
+                                	<th>Nom produit</th>
+                                	<th>Nombre d'adultes</th>
+                                	<th>Nombre d'enfants</th>
+                                	<th>Date arrivé</th>
+                                	<th>Date départ</th>
+                                	<th>Prix / Adulte</th>
+                                	<th>Prix / Enfant</th>
+                                	<th>Num Vol</th>
+                                	<th>Remarque</th>
+                                	<th>Prix Total </th>
+								</tr>
+
+										
+
+								
+								<?php 
+								foreach ($this->transferts as $key => $transfert){ 
+									$article_url=$this->url(array(),'url_transfert_'.$transfert->id);
+									
+									
+			                      	$prix=$transfert->prix;
+
+	                    			$date_debut=new DateTime($transfert->date_debut);
+	                    			$date_fin = new DateTime($transfert->date_fin);
+
+								?>
+									<tr>
+										<?php // var_dump($transfert); ?>
+	                                	<td><?php echo $transfert->titre ?></td>
+	                                	<td><?php echo $transfert->nombre_adultes ?></td>
+	                                	<td><?php echo $transfert->nombre_enfants + $transfert->nombre_bebe  ?> ( <?php echo $transfert->nombre_enfants ?> enf + <?php echo $transfert->nombre_bebe ?> bébé )</td>
+	                                	<td><?php echo ($transfert->date_debut == "0000-00-00 00:00:00") ? "-" : $date_debut->format("d/m/Y"); ?> - <b><?php echo $transfert->heure_arrive ?></b> </td>
+	                                	<td><?php echo ($transfert->date_fin == "0000-00-00 00:00:00") ? "-" : $date_fin->format("d/m/Y")  ; ?>  - <b><?php echo $transfert->heure_depart ?></b> </td>
+	                                	<td><?php echo FNC::MoneyF($transfert->prix_adulte); ?></td>
+	                                	<td><?php echo FNC::MoneyF($transfert->prix_enfant); ?></td>
+	                                	<td><?php echo $transfert->num_vol ?></td>
+	                                	<td><?php echo $transfert->remarque ?></td>
+	                                	<td><?php echo FNC::MoneyF($prix); ?></td>
+									</tr>
+								<?php } ?>
+
+						</tbody>
+						</table>
+						<?php endif ; ?>
+						<br>
+						<table>
+							<tbody>
+
+									<tr style="border:1px solid #ccc;    background: #db7c37; color: #FFFFFF; font-weight: bold; font-size: 15px;">
+	                                	<td></td>
+	                                	<td></td>
+	                                	<td></td>
+	                                	<td></td>
+	                                	<td></td>
+	                                	<td><b>Prix total a payé</b></td>
+	                                	<td><b><?php echo FNC::MoneyF($this->my_commade->prix_total) ?></b></td>
+									</tr>
+
+								
+							</tbody>
+							
+						</table>
+
+	
+
+	<br><br>
+	<h2>Client : </h2>
+	<tr>
+					<table style="font-size:12px">
+						<tbody>
+							<tr>
+	                            <td><b>NOM</b></td><td><?php echo $this->escape($this->commande_client->sexe); ?> <?php echo $this->escape($this->commande_client->prenom); ?> <?php echo $this->escape($this->commande_client->nom); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>TEL</b></td><td><?php echo $this->escape($this->commande_client->tel); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>GSM</b></td><td><?php echo $this->escape($this->commande_client->gsm); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>FAX</b></td><td><?php echo $this->escape($this->commande_client->fax); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>EMAIL</b></td><td><?php echo $this->escape($this->commande_client->email); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>ADRESSE</b></td><td><?php echo $this->escape($this->commande_client->adresse); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>VILLE</b></td><td><?php echo $this->escape($this->commande_client->ville); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>CP</b></td><td><?php echo $this->escape($this->commande_client->cp); ?></td>
+							</tr>
+							<tr>
+	                            <td><b>PAYS</b></td><td><?php echo $this->escape($this->commande_client->pays); ?></td>
+							</tr>
+							
+						</tbody>
+					</table>
+
+
+						
+					</div>
+					 <!-- End #tab2 -->        
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>

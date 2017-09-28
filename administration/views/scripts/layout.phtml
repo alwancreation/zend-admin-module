@@ -1,0 +1,207 @@
+<?php
+	$agencyDao = new \Classes\Dao\AgencyDao();
+	$agency = $agencyDao->getAgency();
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ 
+	<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<title><?php echo $agency->name ?></title>
+		
+		<!--                       CSS                       -->
+	  	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<!-- Reset Stylesheet -->
+		<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/assets/admin/css/reset.css" type="text/css" media="screen" />
+
+		<!-- Main Stylesheet -->
+		<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/assets/css/bootstrap.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/assets/css/font-awesome.min.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/assets/admin/css/style.css" type="text/css" media="screen" />
+
+		<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
+		<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/assets/admin/css/invalid.css" type="text/css" media="screen" />
+		
+		<!-- Colour Schemes
+	  
+		Default colour scheme is green. Uncomment prefered stylesheet to use it.
+		
+		
+	 
+		-->
+		
+		<!-- Internet Explorer Fixes Stylesheet -->
+		
+		<!--[if lte IE 7]>
+			<link rel="stylesheet" href="<?php echo $this->baseUrl(); ?>/assets/admin/css/ie.css" type="text/css" media="screen" />
+		<![endif]-->
+		
+		<!--                       Javascripts                       -->
+  
+		<!-- jQuery -->
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/assets/admin/scripts/jquery-1.3.2.min.js"></script>
+		
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="/assets/admin/scripts/bootstrap.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script type="text/javascript">
+		    jQuery(function($){
+		        $.datepicker.regional['fr'] = {
+		            closeText: 'Fermer',
+		            prevText: 'Précédent',
+		            nextText: 'Suivant',
+		            currentText: 'Aujourd\'hui',
+		            monthNames: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin','juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+		            monthNamesShort: ['janv.', 'févr.', 'mars', 'avril', 'mai', 'juin','juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
+		            dayNames: ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'],
+		            dayNamesShort: ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'],
+		            dayNamesMin: ['D','L','M','M','J','V','S'],
+		            weekHeader: 'Sem.',
+		            dateFormat: 'dd/mm/yy',
+		            firstDay: 1,
+		            isRTL: false,
+		            showMonthAfterYear: false,
+		            yearSuffix: ''};
+		        $.datepicker.setDefaults($.datepicker.regional['fr']);
+		    });
+        </script>
+		
+		<!-- jQuery Configuration -->
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/assets/admin/scripts/simpla.jquery.configuration.js"></script>
+		
+		<?php /* <!-- Facebox jQuery Plugin -->
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/assets/admin/scripts/facebox.js"></script> */?>
+
+		
+
+		<!-- jQuery WYSIWYG Plugin -->
+		<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/assets/admin/ck/ckeditor.js"></script>
+		
+		
+
+		<!-- Internet Explorer .png-fix -->
+		
+		<!--[if IE 6]>
+			<script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/assets/admin/scripts/DD_belatedPNG_0.0.7a.js"></script>
+			<script type="text/javascript">
+				DD_belatedPNG.fix('.png_bg, img, li');
+			</script>
+		<![endif]-->
+		
+	</head>
+  
+	<body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+		
+		<div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+			
+			<h1 id="sidebar-title"><a href="#">Site</a></h1>
+		  
+			<!-- Logo (221px wide) -->
+			<a href="#" style="display:block; text-align: center;"><img id="logo" src="<?php echo SITE_LOGO ?>" alt="logo" width="180" /></a>
+		  
+			<div id="profile-links">
+				<a href="/" title="View the Site" target="_blank">Afficher le Site</a> | <a href="/administration/login/logout" title="Sign Out">Sign Out</a>
+			</div> 
+			
+			<ul id="main-nav">  <!-- Accordion Menu -->
+
+				<li>
+					<a href="/administration" class="nav-top-item no-submenu<?php echo ($this->page_select=="accueil")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Accueil
+					</a>       
+				</li>
+
+				<li>
+					<a href="/administration/commandes" class="nav-top-item no-submenu<?php echo ($this->page_select=="commandes")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Commandes
+					</a>       
+				</li>
+                <li>
+					<a href="/administration/produits" class="nav-top-item no-submenu<?php echo ($this->page_select=="produits")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Excursions
+					</a>       
+				</li>
+				
+                <li>
+					<a href="/administration/transferts" class="nav-top-item no-submenu<?php echo ($this->page_select=="transferts")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Transferts
+					</a>       
+				</li>
+
+				<li>
+					<a href="/administration/vehicules" class="nav-top-item no-submenu<?php echo ($this->page_select=="vehicules")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Véhicules
+					</a>       
+				</li>
+
+
+                <li>
+					<a href="/administration/pages" class="nav-top-item no-submenu<?php echo ($this->page_select=="pages")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Pages
+					</a>       
+				</li>
+                
+                <li>
+					<a href="/administration/destination" class="nav-top-item no-submenu<?php echo ($this->page_select=="destination")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Destinations
+					</a>       
+				</li>
+
+
+ 				<li style="display: none;">
+					<a href="/administration/categorie" class="nav-top-item no-submenu<?php echo ($this->page_select=="categorie")?' current ':'' ?>"> <!-- Add the class "no-submenu" to menu items with no sub menu -->
+						Catégories
+					</a>
+				</li>
+
+
+
+
+
+				<li>
+					<a href="#" class="nav-top-item <?php echo ($this->page_select=="settings")?' current ':'' ?>">
+						Configurations
+					</a>
+					<ul>
+						<li><a href="/administration/settings">General</a></li>
+						<li><a href="/administration/settings/social">Social</a></li>
+					</ul>
+				</li>      
+				
+			</ul> <!-- End #main-nav -->
+			
+			 <!-- End #messages -->
+			
+		</div></div> <!-- End #sidebar -->
+		
+		<div id="main-content"> <!-- Main Content Section with everything -->
+			
+			<noscript> <!-- Show a notification if the user has disabled javascript -->
+				<div class="notification error png_bg">
+					<div>
+						Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+					</div>
+				</div>
+			</noscript>
+			
+			<!-- Page Head -->
+            
+
+			
+			<div class="clear"></div> <!-- End .clear -->
+			
+			 <?php echo $this->layout()->content; ?>
+             
+			<div id="footer">
+				<small>
+						&#169; Copyright <?php echo date('Y'); ?> | <a href="#">Top</a>
+				</small>
+			</div><!-- End #footer -->
+			
+		</div> <!-- End #main-content -->
+		
+	</div></body>
+  
+</html>

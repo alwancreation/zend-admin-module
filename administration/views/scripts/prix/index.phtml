@@ -1,0 +1,122 @@
+<div class="content-box"><!-- Start Content Box -->
+				
+				<div class="content-box-header">
+					
+					<h3>Prix</h3>
+					
+					<ul class="content-box-tabs">
+						<li><a href="#tab1" class="default-tab">Liste</a></li> <!-- href must be unique and match the id of target div -->
+						<li><a href="#tab2">Ajouter</a></li>
+					</ul>
+					
+					<div class="clear"></div>
+					
+				</div> <!-- End .content-box-header -->
+				
+				<div class="content-box-content">
+			   
+					<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+					
+						<table>
+							
+							<thead>
+								<tr>
+								   <th>Titre</th>
+								   <th>Signe</th>
+								   <th>Prix 1 </th>
+								   <th>Prix 2</th>
+                                   <th>Ordre</th>
+								   <th>Actions</th>
+								</tr>
+								
+							</thead>
+						 
+							
+						 
+							<tbody>
+								
+								<?php 
+								foreach($this->prices as $ligne){
+									
+									
+								?>
+								
+								<tr>
+									<td><?php echo $this->escape($ligne->libelle); ?></td>
+									<td><?php 
+									if($ligne->libelle==1){
+										echo "Inférieur ou égal";
+									}else if ($ligne->libelle==2){
+										echo "Entre";
+									}else if ($ligne->libelle==3){
+										echo "Superieur ou égal";
+									}
+									 ?></td>
+									<td><?php echo $this->escape($ligne->val1); ?></td>
+									<td><?php echo $this->escape($ligne->val2); ?></td>
+                                    <td><?php echo $this->escape($ligne->ordre); ?></td>
+									<td>
+										<!-- Icons -->
+										 <a href="/administration/prix/modifier/id/<?php echo $ligne->id ?>" title="Edit">Modifier</a>
+										 <a href="/administration/prix/supprimer/id/<?php echo $ligne->id ?>" title="Delete">Supprimer</a>
+									</td>
+								</tr>
+								<?php } ?>
+								
+							</tbody>
+							
+						</table>
+						
+					</div> <!-- End #tab1 -->
+					
+					<div class="tab-content" id="tab2">
+					
+						<form action="" method="post" enctype="multipart/form-data">
+							
+							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
+								
+								<p>
+									<label>Titre</label>
+									<input class="text-input medium-input" type="text" id="libelle" name="libelle" />
+								</p>
+                                <p>
+									<label>Signe </label>
+									<select class="text-input small-input" id="signe" name="signe">
+										<option value="1">Inférieur ou égal</option>
+                                        <option value="2">Entre</option>
+                                        <option value="3">Superieur ou égal</option>
+                                    </select>
+								</p>
+                              	 <p>
+									<label>Prix 1 </label>
+									<input class="text-input small-input" type="text" id="val1" name="val1" />
+								</p>
+								
+								<p>
+									<label>Prix 2 </label>
+									<input class="text-input small-input" type="text" id="val2" name="val2" />
+								</p>
+								<p>
+									<label>Ordre</label>
+									<input class="text-input small-input" type="text" id="ordre" name="ordre" />
+								</p>
+								
+								
+								
+								
+							
+								<p>
+									<input class="button" type="submit" value="Ajouter" />
+								</p>
+								
+							</fieldset>
+							
+							<div class="clear"></div><!-- End .clear -->
+							
+						</form>
+						
+					</div> <!-- End #tab2 -->        
+					
+				</div> <!-- End .content-box-content -->
+				
+			</div>
