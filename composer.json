@@ -1,8 +1,22 @@
 {
-    "name": "jfarthing84/vanilla-theme",
-    "type": "package",
-    "require": {
-    	"php": ">=5.3",
-        "composer/installers": "~1.0"
-    }
+	"name": "alwancreation/zend-ta-am",
+	"type": "zend-module",
+	"description": "PPP",
+	"keywords": ["zend","alwan"],
+	"homepage": "http://github.com/fotografde/cakephp-ftp",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Hicham echchaddady",
+			"email": "saluthicham@gmail.com",
+			"homepage": "http://alwan.com"
+		}
+	],
+	"require": {
+		"composer/installers": "*",
+		"phpseclib/phpseclib": "0.3.*"
+	},
+	"extra": {
+		"installer-name": "Ftp"
+	}
 }
