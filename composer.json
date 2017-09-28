@@ -1,0 +1,7 @@
+{
+    "name": "alwancreation/zend-ta-am",
+    "type": "zend-admin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
