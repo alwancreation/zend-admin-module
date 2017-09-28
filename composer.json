@@ -1,6 +1,6 @@
 {
     "name": "alwancreation/zend-ta-am",
-    "type": "zend-admin",
+    "type": "zend-module",
     "require": {
         "composer/installers": "~1.0"
     }
