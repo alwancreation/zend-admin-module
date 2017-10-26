@@ -74,6 +74,7 @@ class Administration_PagesController extends Zend_Controller_Action
                     case 'fr':
                         $data = array(
                             "titre" => $this->getParam("titre", ''),
+                            "url" => $this->getParam("url", ''),
                             "soustitre" => $this->getParam("soustitre", ''),
                             "description" => FNC::cleanHtmlTags($this->getParam("description", '')),
                             "meta" => $this->getParam("meta", ''),
@@ -82,6 +83,7 @@ class Administration_PagesController extends Zend_Controller_Action
                     case 'en':
                         $data = array(
                             "titre_en" => $this->getParam("titre", ''),
+                            "url_en" => $this->getParam("url", ''),
                             "soustitre_en" => $this->getParam("soustitre", ''),
                             "description_en" => FNC::cleanHtmlTags($this->getParam("description", '')),
                             "meta_en" => $this->getParam("meta", ''),
@@ -90,6 +92,7 @@ class Administration_PagesController extends Zend_Controller_Action
                     case 'es':
                         $data = array(
                             "titre_es" => $this->getParam("titre", ''),
+                            "url_es" => $this->getParam("url", ''),
                             "soustitre_es" => $this->getParam("soustitre", ''),
                             "description_es" => FNC::cleanHtmlTags($this->getParam("description", '')),
                             "meta_es" => $this->getParam("meta", ''),
